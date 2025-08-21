@@ -9,11 +9,11 @@
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <a href="index.html"></a>
-                <img src="images/Meta.png" alt="MetaQubitX Logo" height="50">
+            <!-- Logo as a single anchor so image+text keep the same styles -->
+            <a href="index.html" class="logo">
+                <img src="images/Meta.png" alt="MetaQubitX Logo" height="40">
                 <span>MetaQubitX</span>
-            </div>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -28,7 +28,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <span class="badge">Software Development Company</span>
+                <span class="badge">Top Software Development Company</span>
                 <h1>
                     We Deploy World Class Agile<br>
                     Product Teams on Demand
@@ -42,26 +42,53 @@
                 </div>
             </div>
             <div class="hero-images">
-                <!-- Add company/team images here if available -->
+                <!-- Decorative / optional images -->
             </div>
+
+            <!-- Logos marquee: animated row of circular language logos -->
+            <div class="logo-marquee" aria-hidden="false">
+                <div class="marquee-track" role="list" aria-label="Technologies we use">
+                    <!-- single set (will be duplicated via HTML for seamless loop) -->
+                    <div class="marquee-set" role="presentation">
+                        <div class="marquee-item" role="listitem"><img src="images/logos/java.png" alt="Java logo" title="Java"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/python.png" alt="Python logo" title="Python"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/html.png" alt="HTML5 logo" title="HTML5"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/php.png" alt="PHP logo" title="PHP"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/js.png" alt="JavaScript logo" title="JavaScript"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/react.png" alt="React logo" title="React"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/node.png" alt="Node.js logo" title="Node.js"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/go.png" alt="Golang logo" title="Golang"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/aws.png" alt="AWS logo" title="AWS"></div>
+                        <div class="marquee-item" role="listitem"><img src="images/logos/csharp.png" alt="C# logo" title="C#"></div>
+                    </div>
+
+                    <!-- duplicate set for continuous loop -->
+                    <div class="marquee-set" role="presentation" aria-hidden="true">
+                        <div class="marquee-item"><img src="images/logos/java.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/python.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/html.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/php.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/js.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/react.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/node.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/go.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/aws.png" alt=""></div>
+                        <div class="marquee-item"><img src="images/logos/csharp.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
     <footer>
         <div class="footer-container">
             <div class="footer-left">
-            <div class="logo">
-                <a href="index.html"></a>
-                <img src="images/Meta.png" alt="MetaQubitX Logo" height="50">
-                <span>MetaQubitX</span>
-            </div>
-
-                <p> Address : Kuril</p>
+                <img src="images/Meta.png" alt="MetaQubitX Logo" height="32">
+                <p>Kuril</p>
                 <p>
-                    Email :<a href="mailto:metaqubitx@gmail.com">metaqubitx@gmail.com</a><br>
+                    <a href="mailto:metaqubitx@gmail.com">metaqubitx@gmail.com</a><br>
+                    <a href="tel:+880123456790">+880123456790</a>
                 </p>
-                 <p> 
-                    Phone :<a href="tel:+880123456790">+880123456790</a>
-                 </p>
             </div>
             <div class="footer-links">
                 <div>
@@ -93,6 +120,8 @@
                         <li>Java Developers</li>
                         <li>Golang Developers</li>
                         <li>.NET Developers</li>
+                        <li>React Developers</li>
+                        <li>DevOps Engineers</li>
                     </ul>
                 </div>
             </div>
