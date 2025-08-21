@@ -1,13 +1,39 @@
-/* --- Base layout (kept from previous file, plus tweaks to support logo anchor) --- */
+/* MetaQubitX - style.css
+   Combined base styles, header/logo fixes, marquee (round logos) animation,
+   sections (hero, services, calculator, academy, blog, contact), footer,
+   accessibility focus states and reduced-motion handling.
+*/
+
+/* ===== Base ===== */
+:root{
+  --accent:#312fff;
+  --accent-strong:#5345d6;
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#555;
+  --soft-border:#d4d7ee;
+  --glass: rgba(255,255,255,0.6);
+}
+
+* { box-sizing: border-box; }
+html,body { height: 100%; }
 body {
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    background: #f6f8fb;
+    background: var(--bg);
     color: #222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height: 1.45;
 }
+
+/* ===== Header / Nav ===== */
 header {
-    background: #fff;
+    background: var(--card);
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    position: sticky;
+    top: 0;
+    z-index: 60;
 }
 .navbar {
     display: flex;
@@ -15,25 +41,29 @@ header {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 16px 24px;
+    padding: 12px 24px;
+    gap: 18px;
 }
 
-/* Logo as a link: keep font, color and prevent changes on :visited/:active */
+/* Logo anchor (image + text) - prevents font change on click/visited */
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    color: #312fff;
-    text-decoration: none; /* no underline */
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: inherit;
+    line-height: 1;
 }
 .logo img {
     display: block;
+    height: 40px;
+    width: auto;
 }
 
-/* Ensure link pseudo-states don't change font/color */
+/* Ensure link pseudo-states don't alter font/color and keep accessible focus */
 .logo:link,
 .logo:visited,
 .logo:hover,
@@ -45,53 +75,62 @@ header {
     font-family: inherit;
 }
 
-/* Remove mobile tap highlight */
+/* Remove mobile tap highlight for logo and nav CTAs */
 .logo,
-.logo a {
+.nav-links a,
+.cta {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Keep keyboard accessibility — visible but subtle focus */
-.logo:focus-visible {
-    outline: 3px solid rgba(49,47,255,0.18);
-    outline-offset: 4px;
+/* Focus visible for keyboard users */
+.logo:focus-visible,
+.nav-links a:focus-visible,
+.cta:focus-visible,
+.button:focus-visible {
+    outline: 3px solid rgba(49,47,255,0.12);
+    outline-offset: 3px;
     border-radius: 6px;
 }
 
+/* Nav links */
 .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
+.nav-links li { margin: 0; }
 .nav-links li a {
     text-decoration: none;
     color: #222;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 180ms ease;
+    padding: 6px 2px;
+    border-radius: 4px;
 }
 .nav-links li a.active,
 .nav-links li a:hover {
     color: #6c63ff;
 }
+
+/* CTA button in nav */
 .cta {
-    background: #312fff;
+    background: var(--accent);
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    transition: background 0.2s;
+    transition: background 180ms ease;
 }
-.cta:hover {
-    background: #5345d6;
-}
+.cta:hover { background: var(--accent-strong); }
 
-/* Hero */
+/* ===== Hero ===== */
 .hero {
-    padding: 80px 24px 32px 24px;
-    background: linear-gradient(120deg, #f6f8fb 70%, #e6e8fa 100%);
+    padding: 80px 24px 32px;
+    background: linear-gradient(120deg, var(--bg) 70%, #e6e8fa 100%);
     text-align: center;
 }
 .hero-content .badge {
@@ -104,82 +143,81 @@ header {
     margin-bottom: 18px;
 }
 .hero-content h1 {
-    font-size: 2.7rem;
+    font-size: 2.6rem;
     font-weight: 800;
-    margin: 0 0 18px 0;
-    line-height: 1.1;
+    margin: 8px 0 18px;
+    line-height: 1.05;
+    color: #111;
 }
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 28px;
+    font-size: 1.15rem;
+    margin-bottom: 24px;
     color: #333;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .hero-buttons {
     display: flex;
-    gap: 24px;
+    gap: 18px;
     justify-content: center;
-    margin-bottom: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
 }
+
+/* Buttons */
 .button {
-    padding: 12px 30px;
+    padding: 12px 26px;
     border-radius: 8px;
     border: none;
     font-weight: 600;
     text-decoration: none;
     display: inline-block;
-    transition: background 0.2s, color 0.2s;
+    transition: background 160ms ease, color 160ms ease, transform 140ms ease;
     cursor: pointer;
 }
 .button.primary {
-    background: #312fff;
+    background: var(--accent);
     color: #fff;
 }
-.button.primary:hover {
-    background: #5345d6;
-}
+.button.primary:hover { background: var(--accent-strong); transform: translateY(-1px); }
 .button.pdf {
     background: #e6e8fa;
-    color: #312fff;
-    border: 1px solid #312fff;
+    color: var(--accent);
+    border: 1px solid var(--accent);
 }
-.button.pdf:hover {
-    background: #d4d7ee;
-}
+.button.pdf:hover { background: #d4d7ee; transform: translateY(-1px); }
 
-/* --- Marquee (logos scroller) --- */
+/* ===== Marquee (round logos) ===== */
 .logo-marquee {
-    margin: 20px auto 0 auto;
+    margin: 20px auto 0;
     max-width: 1100px;
     overflow: hidden;
-    /* subtle background to separate from hero */
     padding: 12px 16px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.6);
+    background: var(--glass);
     box-shadow: 0 6px 22px rgba(49,47,255,0.04);
+    /* ensure marquee gets keyboard focus outline possible */
 }
-
-/* The outer track holds two sets (duplicated) to make a seamless loop */
 .marquee-track {
     display: flex;
     gap: 18px;
     align-items: center;
-    /* make the track wide enough to accommodate the sets inline */
     width: 100%;
+    transform: translateX(0);
     will-change: transform;
-    /* animation applied to the track's content via transform on the child sets below */
 }
 
-/* each set is a flex container of items; both sets placed side-by-side */
+/* Each set holds the same sequence; both animate left so the sequence repeats smoothly */
 .marquee-set {
     display: flex;
     gap: 18px;
     align-items: center;
     min-width: 100%;
-    /* animate the marquee-set container(s) leftwards */
     animation: marquee 22s linear infinite;
 }
 
-/* individual circular logo wrapper */
+/* Items */
 .marquee-item {
     width: 72px;
     height: 72px;
@@ -190,7 +228,7 @@ header {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .marquee-item img {
     width: 44px;
@@ -199,36 +237,234 @@ header {
     display: block;
 }
 
-/* hover effect: pop */
-.marquee-item:hover {
+/* Hover / focus micro-interaction */
+.marquee-item:hover,
+.marquee-item:focus-within {
     transform: translateY(-6px) scale(1.06);
     box-shadow: 0 8px 20px rgba(49,47,255,0.12);
     cursor: default;
 }
 
-/* pause animation on hover over the marquee area for usability */
-.logo-marquee:hover .marquee-set {
+/* Pause animation when user hovers over the whole marquee (usability) */
+.logo-marquee:hover .marquee-set,
+.logo-marquee:focus-within .marquee-set {
     animation-play-state: paused;
 }
 
-/* define marquee movement: each set shifts left by 100% of its width */
+/* marquee keyframes: each set moves left by exactly its own width (100%) */
 @keyframes marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }
 
-/* respect reduced motion settings */
+/* Subtle per-logo rotation (injected also by script.js; keep graceful fallback here) */
+@keyframes mqLogoSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.logo-img {
+  display:inline-block;
+  will-change: transform;
+  animation: mqLogoSpin 14s linear infinite;
+  transform-origin: 50% 50%;
+}
 @media (prefers-reduced-motion: reduce) {
-    .marquee-set {
-        animation: none;
-    }
+  .marquee-set { animation: none !important; }
+  .logo-img { animation: none !important; }
 }
 
-/* Footer and other sections kept as before */
+/* ===== Services Section ===== */
+.services-section {
+    background: var(--bg);
+    padding: 60px 16px;
+}
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 36px;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.06);
+    padding: 40px 30px;
+}
+.services-left,
+.services-right {
+    flex: 1;
+    min-width: 260px;
+}
+.services-left ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+}
+.services-left ul li {
+    font-size: 1.07rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.services-left .arrow {
+    margin-left: 8px;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.cta-box p { font-size: 1.05rem; }
+.services-right h2 { margin-bottom: 10px; color: var(--accent); font-size: 1.07rem; }
+
+/* ===== MVP Calculator ===== */
+.calculator-section {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.06);
+    padding: 44px 32px;
+    margin-top: 36px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.mvp-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 14px;
+    font-weight: 500;
+}
+.mvp-form select,
+.mvp-form input,
+.mvp-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--soft-border);
+    font-size: 1rem;
+    background: #fff;
+}
+
+/* Result box */
+.mvp-result {
+    margin-top: 22px;
+    background: #e6e8fa;
+    border-radius: 10px;
+    padding: 18px;
+    font-size: 1.05rem;
+}
+
+/* ===== Academy ===== */
+.academy-section {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.06);
+    padding: 48px 32px;
+    margin-top: 36px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.academy-features {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 34px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+.academy-card {
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(49,47,255,0.04);
+    padding: 26px 20px;
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    text-align: left;
+}
+.academy-card h3 { color: var(--accent); margin-bottom: 12px; }
+
+/* ===== Blog ===== */
+.blog-section {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.08);
+    padding: 44px 32px;
+    margin-top: 36px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.blog-list {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 34px;
+}
+.blog-card {
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(49,47,255,0.05);
+    padding: 24px 18px;
+    min-width: 220px;
+    max-width: 320px;
+    text-align: left;
+    flex: 1;
+}
+.blog-card h2 { font-size: 1.13rem; margin-bottom: 8px; }
+.blog-meta { font-size: 0.92rem; color: var(--muted); margin-bottom: 12px; }
+
+/* ===== Contact ===== */
+.contact-section {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.06);
+    padding: 44px 32px;
+    margin-top: 36px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.contact-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+.contact-details div { flex: 1; min-width: 120px; text-align: left; }
+.contact-form label { display:block; text-align:left; margin-bottom:12px; font-weight:500; }
+.contact-form input,
+.contact-form textarea {
+    width:100%;
+    padding:10px 12px;
+    margin-top:6px;
+    margin-bottom:12px;
+    border-radius:8px;
+    border:1px solid var(--soft-border);
+    font-size:1rem;
+}
+
+/* Contact success message */
+.contact-msg {
+    margin-top: 18px;
+    color: #0c8d36;
+    font-weight: 600;
+    font-size: 1.02rem;
+}
+
+/* ===== Footer ===== */
 footer {
     background: #e6e8fa;
     padding: 40px 0 0 0;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 .footer-container {
     display: flex;
@@ -236,91 +472,78 @@ footer {
     margin: 0 auto;
     gap: 40px;
     padding: 0 24px;
+    flex-wrap: wrap;
 }
-.footer-left {
-    flex: 1;
-    min-width: 220px;
-}
-.footer-left img {
-    margin-bottom: 12px;
-}
-.footer-links {
-    flex: 2;
-    display: flex;
-    gap: 60px;
-    justify-content: space-between;
-}
-.footer-links h4 {
-    margin-bottom: 8px;
-    color: #312fff;
-    font-size: 1.07rem;
-}
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.footer-links ul li {
-    margin-bottom: 6px;
-    font-size: 1rem;
-}
-.footer-links ul li a {
-    color: #222;
-    text-decoration: none;
-}
-.footer-links ul li a:hover {
-    text-decoration: underline;
-    color: #5345d6;
-}
+.footer-left { flex: 1; min-width: 220px; }
+.footer-left img { margin-bottom: 12px; }
+.footer-links { flex: 2; display: flex; gap: 60px; justify-content: space-between; flex-wrap: wrap; }
+.footer-links h4 { margin-bottom: 8px; color: var(--accent); font-size: 1.07rem; }
+.footer-links ul { list-style: none; padding: 0; margin: 0; }
+.footer-links ul li { margin-bottom: 6px; font-size: 1rem; }
+.footer-links ul li a { color: #222; text-decoration: none; }
+.footer-links ul li a:hover { text-decoration: underline; color: var(--accent-strong); }
 .footer-bottom {
     text-align: center;
     padding: 18px 0;
-    color: #555;
+    color: var(--muted);
     background: #e6e8fa;
-    font-size: 0.97rem;
+    font-size: 0.96rem;
 }
+
+/* ===== Cookie Banner ===== */
 .cookie-banner {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: #fff;
+    background: var(--card);
     border-top: 1px solid #eee;
-    padding: 16px 24px;
+    padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 90;
+    gap: 12px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
 }
+.cookie-banner p { margin:0; color:#222; font-size:0.95rem; max-width:75%; }
 .cookie-banner button {
-    margin-left: 10px;
-    background: #312fff;
+    margin-left: 8px;
+    background: var(--accent);
     color: #fff;
     border: none;
     border-radius: 6px;
     padding: 8px 12px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 140ms ease;
 }
-.cookie-banner button:hover {
-    background: #5345d6;
+.cookie-banner button:hover { background: var(--accent-strong); }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .navbar { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px; }
+    .nav-links { justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .hero-content h1 { font-size: 2rem; }
+    .services-container { flex-direction: column; padding: 28px 16px; }
+    .academy-features, .blog-list { flex-direction: column; gap: 18px; }
+    .contact-details { flex-direction: column; gap: 8px; }
+    .logo-marquee { padding: 10px; }
+    .marquee-item { width: 58px; height: 58px; }
+    .marquee-item img { width: 36px; height: 36px; }
+    .cookie-banner p { max-width:60%; font-size:0.9rem; }
 }
 
-/* Responsive tweaks */
-@media (max-width: 900px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    .logo-marquee {
-        padding: 10px;
-    }
-    .marquee-item {
-        width: 58px;
-        height: 58px;
-    }
-    .marquee-item img {
-        width: 36px;
-        height: 36px;
-    }
+@media (max-width: 520px) {
+    .hero-content p { font-size: 1rem; padding: 0 8px; }
+    .nav-links { gap: 10px; font-size: 0.95rem; }
+    .cta { padding: 8px 12px; font-size: 0.95rem; }
+    .logo { font-size: 1.08rem; }
 }
+
+/* ===== Utility Helpers ===== */
+.hidden { display: none !important; }
+.center { text-align:center; }
+.max-w-1200 { max-width: 1200px; margin: 0 auto; }
+
+/* End of stylesheet */
