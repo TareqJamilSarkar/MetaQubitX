@@ -541,6 +541,57 @@ footer {
     .logo { font-size: 1.08rem; }
 }
 
+/* FAQ section styles - append to your style.css */
+.faq-section { background: #fff; }
+.faq-left .faq-visual { width: 112px; height: 112px; object-fit:cover; border-radius:18px 0 0 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); }
+.stat-card {
+  min-width:120px;
+  border-radius:0 24px 24px 0;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:6px;
+  box-shadow: none;
+}
+.stat-card .stat-label { font-size:0.95rem; color:#293147; }
+.stat-card .stat-number { font-size:2rem; font-weight:800; color:#0f1226; }
+.stat-blue { background: #DFF3FF; }
+.stat-pink { background: #FFE6EE; }
+.stat-green { background: #E7FFE9; }
+
+/* FAQ right column */
+.faq-right h2 { margin-bottom:18px; color:#0f1020; }
+.faq-list { background: #fff; border-radius:14px; box-shadow: 0 8px 30px rgba(16,22,35,0.06); overflow:hidden; }
+.faq-item { border-bottom:1px solid rgba(16,22,35,0.06); }
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:22px;
+  background:transparent;
+  border:0;
+  text-align:left;
+  cursor:pointer;
+}
+.faq-index { color:#6b7280; font-weight:700; min-width:56px; }
+.faq-title { font-weight:700; color:#0f1020; flex:1; }
+.faq-chevron { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:#fafafa; color:#222; }
+
+.faq-answer { padding:18px 22px 30px 22px; color:#59607a; line-height:1.6; }
+
+/* Responsive */
+@media (max-width:900px){
+  .faq-section .max-w-1200 { flex-direction:column; align-items:center; }
+  .faq-left { order:2; width:100%; display:flex; justify-content:center; gap:20px; }
+  .faq-right { order:1; width:100%; }
+  .faq-left .faq-visual { display:none; } /* hide large visuals on very small screens if desired */
+}
+
 /* ===== Utility Helpers ===== */
 .hidden { display: none !important; }
 .center { text-align:center; }

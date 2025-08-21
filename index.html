@@ -270,6 +270,105 @@
             </div>
         </section>
 
+        <!-- FAQ + Visual Stats section (insert into index.html) -->
+<section class="faq-section" aria-labelledby="faq-heading">
+  <div class="max-w-1200 center" style="display:flex;gap:36px;align-items:flex-start;padding:56px 20px;">
+    <!-- Left: vertical visual stack with images + stat cards -->
+    <div class="faq-left" aria-hidden="true" style="flex:0 0 320px;display:flex;flex-direction:column;gap:22px;">
+      <div class="visual-row" style="display:flex;gap:12px;align-items:center;">
+        <img src="images/team-1.jpg" alt="" class="faq-visual" />
+        <div class="stat-card stat-blue">
+          <div class="stat-label">Top Talents</div>
+          <div class="stat-number">300+</div>
+        </div>
+      </div>
+
+      <div class="visual-row" style="display:flex;gap:12px;align-items:center;">
+        <img src="images/team-2.jpg" alt="" class="faq-visual" />
+        <div class="stat-card stat-pink">
+          <div class="stat-label">Projects</div>
+          <div class="stat-number">80+</div>
+        </div>
+      </div>
+
+      <div class="visual-row" style="display:flex;gap:12px;align-items:center;">
+        <img src="images/team-3.jpg" alt="" class="faq-visual" />
+        <div class="stat-card stat-green">
+          <div class="stat-label">Offices</div>
+          <div class="stat-number">3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: FAQ accordion -->
+    <div class="faq-right" style="flex:1;">
+      <h2 id="faq-heading" style="font-size:2.2rem;margin:0 0 22px 0;">Frequently Asked Questions</h2>
+
+      <div class="faq-list" role="list" aria-label="Frequently asked questions">
+        <!-- FAQ item 1 (open by default) -->
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="true" aria-controls="faq1" id="faq1-btn">
+            <span class="faq-index">01</span>
+            <span class="faq-title">What does offshore software development mean?</span>
+            <span class="faq-chevron" aria-hidden="true">▲</span>
+          </button>
+          <div id="faq1" class="faq-answer" role="region" aria-labelledby="faq1-btn">
+            <p>
+              Offshore software development refers to outsourcing software development tasks to teams or companies in another country.
+              It enables access to specialized talent, cost efficiencies and the ability to scale your engineering capacity.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ item 2 -->
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">
+            <span class="faq-index">02</span>
+            <span class="faq-title">How do I find an offshore software development company?</span>
+            <span class="faq-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div id="faq2" class="faq-answer" role="region" aria-labelledby="faq2-btn" hidden>
+            <p>
+              Start with referrals and case studies, evaluate technical expertise and communication, run a small pilot project,
+              and check legal and IP protections before signing a long-term contract.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ item 3 -->
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">
+            <span class="faq-index">03</span>
+            <span class="faq-title">How do I hire an offshore developer for startups?</span>
+            <span class="faq-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div id="faq3" class="faq-answer" role="region" aria-labelledby="faq3-btn" hidden>
+            <p>
+              Define the role clearly, run technical interviews and pair-programming sessions, and agree milestones and communication cadence
+              to ensure alignment and fast onboarding.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ item 4 -->
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn">
+            <span class="faq-index">04</span>
+            <span class="faq-title">Why choose us for offshore software development?</span>
+            <span class="faq-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div id="faq4" class="faq-answer" role="region" aria-labelledby="faq4-btn" hidden>
+            <p>
+              We combine senior engineering experience, strong communication, proven processes and a commitment to quality delivery
+              so you get predictable outcomes and long-term partnership value.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
     </main>
     <footer>
         <div class="footer-container">

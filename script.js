@@ -132,8 +132,39 @@
       isRunning: function () { return running; }
     };
 
+
+    
     // Accessibility: ensure track has transform set so screen readers won't get weird offsets
     track.style.willChange = 'transform';
 
   }); // DOMContentLoaded
+
+
+  // FAQ accordion behavior - append to script.js
+document.addEventListener('DOMContentLoaded', function () {
+  const faqButtons = document.querySelectorAll('.faq-question');
+  faqButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      // close all
+      faqButtons.forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        const panel = document.getElementById(b.getAttribute('aria-controls'));
+        if (panel) panel.hidden = true;
+        const che = b.querySelector('.faq-chevron');
+        if (che) che.textContent = '▼';
+      });
+      // toggle clicked
+      if (!expanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        if (panel) panel.hidden = false;
+        const che = btn.querySelector('.faq-chevron');
+        if (che) che.textContent = '▲';
+      }
+    });
+  });
+});
+
+  
 })();
