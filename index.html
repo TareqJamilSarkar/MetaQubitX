@@ -5,6 +5,7 @@
     <title>MetaQubitX - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <body>
     <header>
@@ -24,7 +25,29 @@
                 <li><a href="career.html" class="active">Career</a></li>
             </ul>
             <a href="contact.html" class="cta">Schedule a Call</a>
+             <!-- Hamburger Icon for Mobile -->
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Open Menu" aria-controls="mobileSidebar" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </nav>
+
+         <!-- Sidebar Overlay and Sidebar Menu -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <aside class="mobile-sidebar" id="mobileSidebar" aria-hidden="true">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="mvp_calculator.html">MVP Calculator</a></li>
+                    <li><a href="academy.html">Academy</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="career.html">Career</a></li>
+                </ul>
+            </nav>
+        </aside>
     </header>
     <main>
         <section class="hero">
@@ -715,5 +738,6 @@
     </footer>
    
     <script src="script.js"></script>
+    <script src="sidebar.js"></script>
 </body>
 </html>

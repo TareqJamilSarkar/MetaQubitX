@@ -1,0 +1,107 @@
+/* Sidebar Navigation for Mobile View */
+
+.sidebar-toggle {
+    display: none;
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    z-index: 120;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebar-toggle .bar {
+    display: block;
+    width: 28px;
+    height: 4px;
+    margin: 4px auto;
+    background: #312fff;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+@media (max-width: 900px) {
+    .sidebar-toggle {
+        display: flex;
+    }
+    .nav-links,
+    .cta {
+        display: none !important;
+    }
+}
+
+/* Sidebar Styles */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(49,47,255,0.13);
+    z-index: 109;
+    transition: opacity 0.3s;
+}
+
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -6px 0 24px rgba(49,47,255,0.09);
+    z-index: 110;
+    transition: right 0.3s cubic-bezier(.4,2,.6,1);
+    padding: 64px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+}
+
+.mobile-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.mobile-sidebar nav ul li a {
+    font-size: 1.18rem;
+    color: #312fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 4px 0;
+    transition: color 0.2s;
+}
+
+.mobile-sidebar nav ul li a:hover,
+.mobile-sidebar nav ul li a.active {
+    color: #5345d6;
+    text-decoration: underline;
+}
+
+.mobile-sidebar.open {
+    right: 0;
+}
+
+.sidebar-overlay.open {
+    display: block;
+    opacity: 1;
+}
+
+/* Animated Hamburger Icon (Toggle) */
+.sidebar-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.sidebar-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+.sidebar-toggle.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
