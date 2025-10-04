@@ -719,6 +719,114 @@ Python enables powerful, scalable, and flexible solutions, making complex ideas 
   </div>
 </section>
 
+
+        <!-- ================= Review Section ================= -->
+<section class="review-section" id="reviews" aria-labelledby="review-heading" style="padding:80px 20px;background:#f9f9ff;">
+  <div class="max-w-1200 center" style="max-width:900px;margin:0 auto;text-align:center;">
+    
+    <h2 id="review-heading" style="font-size:2.4rem;margin-bottom:10px;color:#333;">Client Reviews</h2>
+    <p style="color:#555;font-size:1.1rem;margin-bottom:40px;">
+      Share your experience with <strong>Meta Qubit X</strong> — we value your feedback!
+    </p>
+
+    <!-- Review Form -->
+    <form id="review-form" style="background:#fff;padding:30px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:left;">
+      <label for="name" style="display:block;font-weight:600;margin-bottom:6px;">Your Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name"
+             style="width:100%;padding:10px 14px;margin-bottom:20px;border:1px solid #ccc;border-radius:8px;">
+
+      <label for="email" style="display:block;font-weight:600;margin-bottom:6px;">Your Email</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email"
+             style="width:100%;padding:10px 14px;margin-bottom:20px;border:1px solid #ccc;border-radius:8px;">
+
+      <label for="message" style="display:block;font-weight:600;margin-bottom:6px;">Your Review</label>
+      <textarea id="message" name="message" rows="4" required placeholder="Write your review..."
+                style="width:100%;padding:10px 14px;margin-bottom:20px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+      <!-- Star Rating -->
+      <div style="margin-bottom:20px;">
+        <span style="display:block;font-weight:600;margin-bottom:8px;">Your Rating:</span>
+        <div class="star-rating" style="font-size:1.8rem;color:#ccc;cursor:pointer;display:flex;gap:4px;">
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
+        </div>
+      </div>
+
+      <button type="submit" style="background:#007bff;color:white;padding:12px 28px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Submit Review
+      </button>
+    </form>
+
+    <!-- Review Display Area -->
+    <div id="reviews-list" style="margin-top:50px;text-align:left;">
+      <h3 style="font-size:1.6rem;margin-bottom:20px;">Recent Reviews</h3>
+      <!-- Example static review -->
+      <div class="review-card" style="background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <strong>Jane Doe</strong>
+          <span style="color:#FFD700;">★★★★★</span>
+        </div>
+        <p style="margin:0;color:#555;">Excellent service! Meta Qubit X helped our business grow with their amazing digital solutions.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script>
+  // Handle star rating and review submission
+  const stars = document.querySelectorAll('.star-rating span');
+  const form = document.getElementById('review-form');
+  const list = document.getElementById('reviews-list');
+  let selectedRating = 0;
+
+  // Star click effect (turn yellow)
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = star.dataset.value;
+      stars.forEach(s => {
+        s.style.color = (s.dataset.value <= selectedRating) ? '#FFD700' : '#ccc';
+      });
+    });
+  });
+
+  // Handle form submit
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    
+    if (!name || !email || !message || selectedRating === 0) {
+      alert('Please fill out all fields and select a star rating!');
+      return;
+    }
+
+    const newReview = document.createElement('div');
+    newReview.className = 'review-card';
+    newReview.style = 'background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);';
+    newReview.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div>
+          <strong>${name}</strong><br>
+          <small style="color:#888;">${email}</small>
+        </div>
+        <span style="color:#FFD700;">${'★'.repeat(selectedRating)}</span>
+      </div>
+      <p style="margin:0;color:#555;">${message}</p>
+    `;
+    list.appendChild(newReview);
+
+    form.reset();
+    stars.forEach(s => s.style.color = '#ccc');
+    selectedRating = 0;
+  });
+</script>
+
+
+
     </main>
     <footer>
         <div class="footer-container">
