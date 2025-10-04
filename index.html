@@ -719,8 +719,7 @@ Python enables powerful, scalable, and flexible solutions, making complex ideas 
   </div>
 </section>
 
-
-        <!-- ================= Review Section ================= -->
+<!-- ================= Review Section ================= -->
 <section class="review-section" id="reviews" aria-labelledby="review-heading" style="padding:80px 20px;background:#f9f9ff;">
   <div class="max-w-1200 center" style="max-width:900px;margin:0 auto;text-align:center;">
     
@@ -763,47 +762,58 @@ Python enables powerful, scalable, and flexible solutions, making complex ideas 
     <!-- Review Display Area -->
     <div id="reviews-list" style="margin-top:50px;text-align:left;">
       <h3 style="font-size:1.6rem;margin-bottom:20px;">Recent Reviews</h3>
-      <!-- Example static review -->
-      <div class="review-card" style="background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <strong>Jane Doe</strong>
-          <span style="color:#FFD700;">★★★★★</span>
-        </div>
-        <p style="margin:0;color:#555;">Excellent service! Meta Qubit X helped our business grow with their amazing digital solutions.</p>
-      </div>
     </div>
 
   </div>
 </section>
+
 <script>
-  // Handle star rating and review submission
   const stars = document.querySelectorAll('.star-rating span');
   const form = document.getElementById('review-form');
   const list = document.getElementById('reviews-list');
   let selectedRating = 0;
 
-  // Star click effect (turn yellow)
+  // Load reviews from localStorage
+  window.addEventListener('load', () => {
+    const savedReviews = JSON.parse(localStorage.getItem('metaQubitReviews')) || [];
+    savedReviews.forEach(r => displayReview(r.name, r.email, r.message, r.rating));
+  });
+
+  // Handle star rating click
   stars.forEach(star => {
     star.addEventListener('click', () => {
       selectedRating = star.dataset.value;
-      stars.forEach(s => {
-        s.style.color = (s.dataset.value <= selectedRating) ? '#FFD700' : '#ccc';
-      });
+      stars.forEach(s => s.style.color = (s.dataset.value <= selectedRating) ? '#FFD700' : '#ccc');
     });
   });
 
-  // Handle form submit
+  // Handle form submission
   form.addEventListener('submit', e => {
     e.preventDefault();
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
-    
+
     if (!name || !email || !message || selectedRating === 0) {
       alert('Please fill out all fields and select a star rating!');
       return;
     }
 
+    const review = { name, email, message, rating: selectedRating };
+    displayReview(name, email, message, selectedRating);
+
+    // Save to localStorage
+    const existing = JSON.parse(localStorage.getItem('metaQubitReviews')) || [];
+    existing.push(review);
+    localStorage.setItem('metaQubitReviews', JSON.stringify(existing));
+
+    form.reset();
+    stars.forEach(s => s.style.color = '#ccc');
+    selectedRating = 0;
+  });
+
+  // Function to display a review
+  function displayReview(name, email, message, rating) {
     const newReview = document.createElement('div');
     newReview.className = 'review-card';
     newReview.style = 'background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);';
@@ -813,16 +823,12 @@ Python enables powerful, scalable, and flexible solutions, making complex ideas 
           <strong>${name}</strong><br>
           <small style="color:#888;">${email}</small>
         </div>
-        <span style="color:#FFD700;">${'★'.repeat(selectedRating)}</span>
+        <span style="color:#FFD700;">${'★'.repeat(rating)}</span>
       </div>
       <p style="margin:0;color:#555;">${message}</p>
     `;
     list.appendChild(newReview);
-
-    form.reset();
-    stars.forEach(s => s.style.color = '#ccc');
-    selectedRating = 0;
-  });
+  }
 </script>
 
 
