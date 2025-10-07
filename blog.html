@@ -78,6 +78,131 @@
 
 
 
+        <!-- Add this section to your about.html where you'd like to feature your sub-branch company -->
+<section class="sub-company-section">
+    <div class="sub-company-container">
+        <h2>Our Sub-Branch Company</h2>
+        <div class="sub-company-card">
+            <img src="images/time-and-technology-logo.png" alt="Time and Technology Logo" class="sub-company-logo">
+            <div class="sub-company-info">
+                <div class="sub-company-name">Time and Technology</div>
+                <div class="sub-company-desc">
+                    Time and Technology is the innovative sub-branch of our mother company, Qubit Cloud. Specializing in digital solutions and emerging technologies, Time and Technology empowers businesses to optimize their operations and embrace the future of IT development.
+                </div>
+                <a href="https://timeandtechnology.com" class="sub-company-btn" target="_blank">Visit Website</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.sub-company-section {
+    background: #f7f8fc;
+    padding: 56px 0 44px 0;
+}
+.sub-company-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 12px;
+    text-align: center;
+}
+.sub-company-container h2 {
+    font-size: 2rem;
+    color: #1635af;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: .01em;
+}
+.sub-company-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(49,47,255,0.09);
+    padding: 32px 18px 24px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow .18s, transform .18s;
+}
+.sub-company-card:hover {
+    box-shadow: 0 12px 36px rgba(49,47,255,0.14);
+    transform: translateY(-6px) scale(1.04);
+}
+.sub-company-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: #f6f8fb;
+    box-shadow: 0 2px 8px rgba(49,47,255,0.04);
+}
+.sub-company-info {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+}
+.sub-company-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #312fff;
+    margin-bottom: 12px;
+}
+.sub-company-desc {
+    font-size: 1.06rem;
+    color: #23295f;
+    margin-bottom: 22px;
+}
+.sub-company-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #1635af;
+    border: 2px solid #1635af;
+    border-radius: 8px;
+    background: transparent;
+    text-decoration: none;
+    transition: background .18s, color .18s, box-shadow .18s;
+}
+.sub-company-btn:hover {
+    background: #1635af;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(49,47,255,0.14);
+}
+@media (max-width: 600px) {
+    .sub-company-card {
+        padding: 18px 8px;
+    }
+    .sub-company-logo {
+        width: 64px;
+        height: 64px;
+    }
+    .sub-company-info {
+        max-width: 100%;
+    }
+}
+</style>
+
+<script>
+// Optional: Card hover effect for extra interactivity
+document.addEventListener('DOMContentLoaded', function () {
+    var card = document.querySelector('.sub-company-card');
+    if (card) {
+        card.addEventListener('mouseenter', function () {
+            card.style.transform = 'scale(1.04)';
+            card.style.boxShadow = '0 12px 36px rgba(49,47,255,0.16)';
+        });
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        });
+    }
+});
+</script>
+
+
+
 
         <!-- Place this section where you want in about.html -->
 <section class="about-collab-section">
