@@ -166,5 +166,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+
+// Add to about.html <script> or about.js (optional for extra UX)
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.collab-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function () {
+            card.style.transform = 'scale(1.06)';
+            card.style.boxShadow = '0 12px 36px rgba(49,47,255,0.18)';
+        });
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        });
+    });
+});
+
+
+
   
 })();
