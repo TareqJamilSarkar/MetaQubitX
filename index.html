@@ -773,53 +773,83 @@
   </div>
 </section>
 <script>
-  // Handle star rating and review submission
-  const stars = document.querySelectorAll('.star-rating span');
-  const form = document.getElementById('review-form');
-  const list = document.getElementById('reviews-list');
-  let selectedRating = 0;
+// Handle star rating and review submission
+const stars = document.querySelectorAll('.star-rating span');
+const form = document.getElementById('review-form');
+const list = document.getElementById('reviews-list');
+let selectedRating = 0;
 
-  // Star click effect (turn yellow)
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      selectedRating = star.dataset.value;
-      stars.forEach(s => {
-        s.style.color = (s.dataset.value <= selectedRating) ? '#FFD700' : '#ccc';
-      });
+// Star click effect (turn yellow)
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    selectedRating = star.dataset.value;
+    stars.forEach(s => {
+      s.style.color = (s.dataset.value <= selectedRating) ? '#FFD700' : '#ccc';
     });
   });
+});
 
-  // Handle form submit
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-    
-    if (!name || !email || !message || selectedRating === 0) {
-      alert('Please fill out all fields and select a star rating!');
-      return;
+// Handle form submit via AJAX
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const message = form.message.value.trim();
+
+  if (!name || !email || !message || selectedRating === 0) {
+    alert('Please fill out all fields and select a star rating!');
+    return;
+  }
+
+  // AJAX POST to submit_review.php
+  fetch('submit_review.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      name: name,
+      email: email,
+      message: message,
+      rating: selectedRating
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      loadReviews(); // reload reviews after submit
+      form.reset();
+      stars.forEach(s => s.style.color = '#ccc');
+      selectedRating = 0;
+      alert('Thank you for your review!');
+    } else {
+      alert(data.message || 'Error submitting review.');
     }
+  })
+  .catch(() => alert('Error submitting review!'));
+});
 
-    const newReview = document.createElement('div');
-    newReview.className = 'review-card';
-    newReview.style = 'background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);';
-    newReview.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-        <div>
-          <strong>${name}</strong><br>
-          <small style="color:#888;">${email}</small>
+// Function to load reviews from database
+function loadReviews() {
+  fetch('get_reviews.php')
+    .then(res => res.json())
+    .then(data => {
+      const reviewsHtml = data.map(r => `
+        <div class="review-card" style="background:#fff;padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.05);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div>
+              <strong>${r.name}</strong><br>
+              <small style="color:#888;">${r.email}</small>
+            </div>
+            <span style="color:#FFD700;">${'★'.repeat(r.rating)}</span>
+          </div>
+          <p style="margin:0;color:#555;">${r.message}</p>
         </div>
-        <span style="color:#FFD700;">${'★'.repeat(selectedRating)}</span>
-      </div>
-      <p style="margin:0;color:#555;">${message}</p>
-    `;
-    list.appendChild(newReview);
+      `).join('');
+      list.innerHTML = `<h3 style="font-size:1.6rem;margin-bottom:20px;">Recent Reviews</h3>${reviewsHtml}`;
+    });
+}
 
-    form.reset();
-    stars.forEach(s => s.style.color = '#ccc');
-    selectedRating = 0;
-  });
+// Initial load
+loadReviews();
 </script>
 
 
